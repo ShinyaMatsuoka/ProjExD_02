@@ -9,7 +9,8 @@ delta = {  # キー：移動量／値：（横方向移動量，縦方向移動�
         pg.K_UP: (0, -5),
         pg.K_DOWN: (0, +5),
         pg.K_LEFT: (-5, 0),
-        pg.K_RIGHT: (+5, 0)}
+        pg.K_RIGHT: (+5, 0)
+        }
 
 
 def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
@@ -32,14 +33,16 @@ def main():
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     kk_img1 = pg.transform.flip(kk_img, True, False)
-    kk_hen = {(-5, 0):kk_img,
-              (-5, -5):pg.transform.rotozoom(kk_img, -45, 1.0),
-              (0, -5):pg.transform.rotozoom(kk_img1, 90, 1.0),
-              (+5, -5):pg.transform.rotozoom(kk_img1, 45, 1.0),
-              (+5, 0):kk_img1,
-              (+5, +5):pg.transform.rotozoom(kk_img1,-+45, 1.0),
-              (0, +5):pg.transform.rotozoom(kk_img1, -90, 1.0),
-              (-5, +5):pg.transform.rotozoom(kk_img, 45, 1.0)}
+    kk_hen = {
+            (-5, 0):kk_img,
+            (-5, -5):pg.transform.rotozoom(kk_img, -45, 1.0),
+            (0, -5):pg.transform.rotozoom(kk_img1, 90, 1.0),
+            (+5, -5):pg.transform.rotozoom(kk_img1, 45, 1.0),
+            (+5, 0):kk_img1,
+            (+5, +5):pg.transform.rotozoom(kk_img1,-+45, 1.0),
+            (0, +5):pg.transform.rotozoom(kk_img1, -90, 1.0),
+            (-5, +5):pg.transform.rotozoom(kk_img, 45, 1.0)
+            }
     kk_rct = kk_img.get_rect()  # こうかとんSurfaceのRectを抽出
     kk_rct.center = 900, 400  # こうかとんの初期座標
     bb_img = pg.Surface((20, 20))  # 透明のSurfaceを作る
@@ -75,9 +78,8 @@ def main():
 
         x, y = sum_mv[0], sum_mv[1]
         if event.type == pg.KEYDOWN:
-            kk_img = kk_hen[(x, y)]
-            if [0,0]:
-                kk_img
+            if (x, y) != (0, 0):
+                kk_img = kk_hen[(x, y)]
 
         screen.blit(bg_img, [0, 0])
         kk_rct.move_ip(sum_mv[0], sum_mv[1])
