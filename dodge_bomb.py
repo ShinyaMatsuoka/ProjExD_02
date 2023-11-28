@@ -58,6 +58,11 @@ def main():
                 return
         
         if kk_rct.colliderect(bb_rct):
+            kk_img = pg.image.load("ex02/fig/8.png")  # 切り替え画像
+            kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+            screen.blit(bg_img, [0, 0])  # 背景貼り付け
+            screen.blit(kk_img, kk_rct)  # 画像貼り付け
+            pg.display.update()  # 画面更新
             print("Game Over")
             return
         
